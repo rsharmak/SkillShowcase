@@ -1,4 +1,4 @@
-import { useTypingAnimation } from '@/hooks/useTypingAnimation';
+import { useTypingAnimation } from '../hooks/useTypingAnimation';
 
 const terminalCommands = [
   { prompt: '❯', command: 'whoami', output: 'Rakesh Kumar Sharma' },

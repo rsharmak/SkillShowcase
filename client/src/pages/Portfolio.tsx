@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import MatrixRain from "@/components/MatrixRain";
-import TerminalWindow from "@/components/TerminalWindow";
-import NavigationDots from "@/components/NavigationDots";
-import GlassCard from "@/components/GlassCard";
-import SkillTag from "@/components/SkillTag";
-import ContactForm from "@/components/ContactForm";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
+import MatrixRain from "../components/MatrixRain";
+import TerminalWindow from "../components/TerminalWindow";
+import NavigationDots from "../components/NavigationDots";
+import GlassCard from "../components/GlassCard";
+import SkillTag from "../components/SkillTag";
+import ContactForm from "../components/ContactForm";
+import { useScrollSpy } from "../hooks/useScrollSpy";
 
 const skills = {
   languages: ["Java", "JavaScript", "SQL", "Shell Scripting"],
@@ -86,6 +86,30 @@ const projects = [
   }
 ];
 
+const awards = [
+  {
+    title: "GEMS",
+    organization: "MassMutual India",
+    description: "Recognized for outstanding contributions to project delivery",
+    year: "2023",
+    icon: "🏆"
+  },
+  {
+    title: "PAT ON BACK",
+    organization: "MassMutual India", 
+    description: "Awarded twice for exceptional teamwork and innovative problem-solving",
+    year: "2022 & 2023",
+    icon: "👏"
+  },
+  {
+    title: "AWS Certified Cloud Practitioner",
+    organization: "Amazon Web Services",
+    description: "Professional certification demonstrating cloud computing knowledge",
+    year: "2022",
+    icon: "☁️"
+  }
+];
+
 export default function Portfolio() {
   const activeSection = useScrollSpy([
     "hero",
@@ -93,6 +117,7 @@ export default function Portfolio() {
     "skills",
     "experience",
     "projects",
+    "awards",
     "contact"
   ]);
 
@@ -414,52 +439,56 @@ export default function Portfolio() {
               </GlassCard>
             ))}
 
-            {/* Awards Section */}
-            <GlassCard className="p-8 relative overflow-hidden">
-              <div 
-                className="absolute top-0 left-0 right-0 h-1"
-                style={{
-                  background: 'linear-gradient(to right, var(--accent-orange), var(--accent-green), var(--accent-blue))'
-                }}
-              />
-              
-              <div className="mb-4">
-                <span 
-                  className="inline-block text-white px-4 py-1 rounded-full text-sm font-mono"
+
+          </div>
+        </div>
+      </section>
+
+      {/* Awards & Achievements Section */}
+      <section id="awards" className="min-h-screen py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-5xl font-bold text-center mb-16 gradient-text">Awards & Achievements</h2>
+          
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+            {awards.map((award, index) => (
+              <GlassCard key={index} className="p-8 text-center relative overflow-hidden">
+                <div 
+                  className="absolute top-0 left-0 right-0 h-1"
                   style={{
-                    background: 'linear-gradient(to right, var(--accent-green), var(--accent-orange))'
+                    background: index === 0 ? 
+                      'linear-gradient(to right, var(--accent-green), var(--accent-blue))' :
+                      index === 1 ?
+                      'linear-gradient(to right, var(--accent-blue), var(--accent-purple))' :
+                      'linear-gradient(to right, var(--accent-purple), var(--accent-orange))'
                   }}
-                >
-                  Recognition
-                </span>
-              </div>
-              
-              <h3 className="text-2xl font-bold text-[var(--accent-orange)] mb-6 font-mono">Awards & Achievements</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <span className="text-3xl mr-4">🏆</span>
-                  <div>
-                    <h4 className="text-lg font-semibold text-[var(--accent-green)]">GEMS Award</h4>
-                    <p className="text-[var(--text-secondary)]">Recognized for outstanding contributions to project delivery</p>
-                  </div>
+                />
+                
+                <div className="text-6xl mb-6 floating" style={{animationDelay: `${index * 0.5}s`}}>
+                  {award.icon}
                 </div>
-                <div className="flex items-center">
-                  <span className="text-3xl mr-4">🌟</span>
-                  <div>
-                    <h4 className="text-lg font-semibold text-[var(--accent-blue)]">PAT ON BACK (2x)</h4>
-                    <p className="text-[var(--text-secondary)]">Awarded twice for exceptional teamwork and innovative problem-solving</p>
-                  </div>
+                
+                <h3 className="text-2xl font-bold mb-3 font-mono"
+                    style={{
+                      color: index === 0 ? 'var(--accent-green)' : 
+                             index === 1 ? 'var(--accent-blue)' : 'var(--accent-purple)'
+                    }}>
+                  {award.title}
+                </h3>
+                
+                <p className="text-[var(--text-secondary)] mb-4 leading-relaxed">
+                  {award.description}
+                </p>
+                
+                <div className="space-y-2">
+                  <p className="text-[var(--accent-orange)] font-mono font-semibold">
+                    {award.organization}
+                  </p>
+                  <p className="text-[var(--text-muted)] text-sm font-mono">
+                    {award.year}
+                  </p>
                 </div>
-                <div className="flex items-center">
-                  <span className="text-3xl mr-4">🎓</span>
-                  <div>
-                    <h4 className="text-lg font-semibold text-[var(--accent-purple)]">AWS Certified Cloud Practitioner</h4>
-                    <p className="text-[var(--text-secondary)]">Professional certification in cloud technologies</p>
-                  </div>
-                </div>
-              </div>
-            </GlassCard>
+              </GlassCard>
+            ))}
           </div>
         </div>
       </section>
